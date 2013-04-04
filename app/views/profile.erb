@@ -1,0 +1,13 @@
+<h1>Hey, user, here are your shauwty URLs:</h1>
+
+<% if @user_urls %>
+  <table>
+   <tr><th>URL</th><th>Short URL</th><th>Click Count</th></tr>
+   <% @user_urls.reverse.each do |link| %>
+   <tr><td><%= link.url %> </td>
+       <td><a href= "/shorty/<%= link.key %>">shorty/<%= link.key %></a></td>
+       <td><%= link.click_count %></td>
+   </tr>
+    <% end %>
+  </table>
+<% end %>

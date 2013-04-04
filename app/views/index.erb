@@ -1,0 +1,33 @@
+<h1>Better Bitly!</h1>
+
+<% if @url %>
+  <% if @url.errors.present? %>
+     You had errors!
+    <% @url.errors.full_messages.each do |message| %>
+    <ul>
+      <li><span class="error"><%= message %></span></li>
+    </ul>
+    <% end %>
+  <% else %>
+    <p> Your new link is: 
+      <a href='localhost:9393/shorty/<%=@url.key %>'>localhost:9393/shorty/<%=@url.key %></a> </p>
+  <% end %>
+<% end %>
+
+<form action='/urls' method = 'post'>
+  Please Enter URL:
+  <p><input type='text' name = 'url' autofocus='autofocus'></p>
+  <p><input type='submit' value='Ready, Set, Go!'></p>
+</form>
+
+<% if @urls %>
+  <table>
+   <tr><th>URL</th><th>Short URL</th><th>Click Count</th></tr>
+   <% @urls.reverse.each do |link| %>
+   <tr><td><%= link.url %> </td>
+       <td><a href= "/shorty/<%= link.key %>">shorty/<%= link.key %></a></td>
+       <td><%= link.click_count %></td>
+   </tr>
+    <% end %>
+  </table>
+<% end %>
